@@ -1,0 +1,164 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+}
+
+/* Landing Page */
+body.landing {
+    background: linear-gradient(to right, #ff9933, #ffffff, #138808);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.container {
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 10px;
+}
+button {
+    background: #138808;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:hover {
+    background: #0e6606;
+}
+
+/* Celebration Page */
+body.celebration {
+    background: skyblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.scene {
+    position: relative;
+    height: 500px; /* taller scene for bigger flag & pole */
+    width: 300px;
+}
+
+.flag-container {
+     position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.pole {
+    width: 25px;
+    height: 1500px; /* taller pole */
+    background: #444;
+}
+
+.flag {
+    display: flex;
+    flex-direction: column;
+    line-height: 0;
+    animation: wave 2.5s infinite ease-in-out;
+    transform-origin: left center; /* pivot from pole */
+}
+
+/* Stripes */
+.saffron {
+    background: #FF9933;
+    height: 100px;
+    width: 400px;
+}
+
+.white {
+    background: white;
+    height: 100px;
+    width: 400px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.green {
+    background: #138808;
+    height: 100px;
+    width: 400px;
+}
+
+/* Ashoka Chakra */
+.chakra {
+  width: 70px;   /* adjust as you like */
+  height: 70px;
+  display: block;
+}
+
+/* Wave animation */
+@keyframes wave {
+    0% { transform: rotate(0deg) skewY(0deg); }
+    25% { transform: rotate(1deg) skewY(2deg); }
+    50% { transform: rotate(0deg) skewY(0deg); }
+    75% { transform: rotate(-1deg) skewY(-2deg); }
+    100% { transform: rotate(0deg) skewY(0deg); }
+}
+
+
+
+/* Officer */
+.officer {
+    position: absolute;
+    bottom: 0; /* Adjust to position officer below the flag */
+    width: 150px;
+    
+}
+    
+
+.officer-left {
+    left: -50%; /* Adjust distance from pole */
+    max-height: 800px;
+    height: 500px;
+} 
+
+.officer-right {
+    right:-10%
+}  
+
+/* Flowers container */
+#flowers-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 999;
+}
+
+/* Flower animation */
+.flower {
+    position: absolute;
+    top: -20px;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Waving animation for the flag */
+@keyframes waveFlag {
+    0%   { transform: translateX(0) skewY(0deg); }
+    25%  { transform: translateX(4px) skewY(2deg); }
+    50%  { transform: translateX(0) skewY(0deg); }
+    75%  { transform: translateX(-4px) skewY(-2deg); }
+    100% { transform: translateX(0) skewY(0deg); }
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flag Hoisting</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="celebration">
+    <audio id="anthem" autoplay>
+        <source src="jana-gana-mana.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+<div class="flag-container">
+    <div class="pole"></div>
+
+    <div class="flag">
+        <div class="saffron stripe"></div>
+<div class="white stripe">
+  <svg class="chakra" viewBox="0 0 100 100" aria-label="Ashoka Chakra">
+    <!-- Outer ring -->
+    <circle cx="50" cy="50" r="48" fill="none" stroke="#000080" stroke-width="4"/>
+    <!-- Center hub -->
+    <circle cx="50" cy="50" r="4" fill="#000080"/>
+    <!-- 24 spokes -->
+    <g transform="translate(50,50)" stroke="#000080" stroke-width="2">
+      <line x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(15)"  x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(30)"  x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(45)"  x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(60)"  x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(75)"  x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(90)"  x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(105)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(120)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(135)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(150)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(165)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(180)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(195)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(210)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(225)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(240)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(255)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(270)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(285)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(300)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(315)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(330)" x1="0" y1="0" x2="0" y2="-46"/>
+      <line transform="rotate(345)" x1="0" y1="0" x2="0" y2="-46"/>
+    </g>
+  </svg>
+</div>
+
+        <div class="green stripe"></div>
+        </div>
+
+          <!-- Left Officer -->
+    <img src="army-officer.png" alt="Army Officer" class="officer officer-left">
+
+    <!-- Right Officer -->
+    <img src="army-officer-2.png" alt="Army Officer" class="officer officer-right">
+    </div>
+    
+
+    
+
+    <!-- Flowers container -->
+    <div id="flowers-container"></div>
+
+    <script>
+        window.onload = function() {
+            const anthem = document.getElementById("anthem");
+
+            // Start anthem after delay
+            setTimeout(() => {
+                anthem.play();
+                startFlowerAnimation();
+            }, 1500);
+        };
+
+   function startFlowerAnimation() {
+    const container = document.getElementById("flowers-container");
+    const flowerIcons = ["🌸", "🌼", "🌺", "💮", "🌹", "🌻"]; // more variety
+
+    // Create 50 flowers initially (was 20)
+    for (let i = 0; i < 50; i++) {
+        createFlower(container, flowerIcons);
+    }
+
+    // Keep making 5 flowers every 0.3 seconds (was 1 every 0.5s)
+    setInterval(() => {
+        for (let j = 0; j < 5; j++) {
+            createFlower(container, flowerIcons);
+        }
+    }, 300);
+}
+
+function createFlower(container, flowerIcons) {
+    let flower = document.createElement("div");
+    flower.classList.add("flower");
+    flower.textContent = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+    flower.style.left = Math.random() * 100 + "vw"; // random horizontal position
+    flower.style.animationDuration = 3 + Math.random() * 2 + "s"; // random speed
+    flower.style.fontSize = 20 + Math.random() * 15 + "px"; // random size
+    container.appendChild(flower);
+
+    // Remove flower after animation
+    setTimeout(() => {
+        flower.remove();
+    }, 5000);
+}
+
+    </script>
+</body>
+</html>
