@@ -68,6 +68,8 @@
 
     <!-- Flowers container -->
     <div id="flowers-container"></div>
+    <div id="balloons-container"></div>
+
 
     <script>
         window.onload = function() {
@@ -112,6 +114,138 @@ function createFlower(container, flowerIcons) {
     }, 5000);
 }
 
+// ===== Balloon Animation =====
+function startBalloonAnimation() {
+    const balloonContainer = document.getElementById("balloons-container");
+    const colors = ["#FF9933", "#FFFFFF", "#138808"]; // Saffron, White, Green
+
+    setInterval(() => {
+        let balloon = document.createElement("div");
+        balloon.classList.add("balloon");
+
+        // Random color
+        balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+        // Random horizontal position
+        balloon.style.left = Math.random() * 100 + "vw";
+
+        // Random animation duration
+        balloon.style.animationDuration = (5 + Math.random() * 3) + "s";
+
+        // String element
+        let string = document.createElement("div");
+        string.classList.add("string");
+        balloon.appendChild(string);
+
+        balloonContainer.appendChild(balloon);
+
+        // Remove balloon after animation
+        setTimeout(() => {
+            balloon.remove();
+        }, 8000);
+    }, 500); // spawn every half second
+}
+
+// Start balloons after flowers
+window.onload = function() {
+    const anthem = document.getElementById("anthem");
+
+    setTimeout(() => {
+        anthem.play();
+        startFlowerAnimation();
+        startBalloonAnimation();
+    }, 1500);
+};
+
+
     </script>
+
+
+
+<!-- Fireworks Canvas -->
+<canvas id="fireworks"></canvas>
+
+<style>
+    #fireworks {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none; /* So clicks pass through */
+        z-index: 9999; /* Above everything */
+    }
+</style>
+
+<script>
+const canvas = document.getElementById('fireworks');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+class Firework {
+    constructor(x, y, colors) {
+        this.x = x;
+        this.y = y;
+        this.particles = [];
+        this.colors = colors;
+        for (let i = 0; i < 100; i++) {
+            this.particles.push({
+                x: x,
+                y: y,
+                angle: Math.random() * 2 * Math.PI,
+                speed: Math.random() * 4 + 1,
+                radius: Math.random() * 2 + 1,
+                alpha: 1,
+                decay: Math.random() * 0.015 + 0.003
+            });
+        }
+    }
+    update() {
+        this.particles.forEach(p => {
+            p.x += Math.cos(p.angle) * p.speed;
+            p.y += Math.sin(p.angle) * p.speed;
+            p.alpha -= p.decay;
+        });
+        this.particles = this.particles.filter(p => p.alpha > 0);
+    }
+    draw() {
+        this.particles.forEach(p => {
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI);
+            ctx.fillStyle = `rgba(${this.colors},${p.alpha})`;
+            ctx.fill();
+        });
+    }
+}
+
+let fireworks = [];
+
+function createFirework() {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height / 2;
+    const colors = `${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 255)}`;
+    fireworks.push(new Firework(x, y, colors));
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    fireworks.forEach((f, index) => {
+        f.update();
+        f.draw();
+        if (f.particles.length === 0) fireworks.splice(index, 1);
+    });
+    requestAnimationFrame(animate);
+}
+
+setInterval(createFirework, 800);
+animate();
+</script>
 </body>
 </html>
